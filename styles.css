@@ -23,8 +23,9 @@ header {
     background-color: #007bff;
     color: #fff;
     text-align: center;
-    padding: 50px 0;
+    padding: 20px 0;
     margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 header h1 {
@@ -32,8 +33,26 @@ header h1 {
     margin-bottom: 10px;
 }
 
-header p {
-    font-size: 1.5rem;
+nav ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+nav ul li {
+    margin: 0 10px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+nav ul li a:hover {
+    color: #e6f2ff;
 }
 
 main {
@@ -46,12 +65,12 @@ main {
 
 section {
     background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 30px;
     text-align: center;
     width: calc(50% - 40px);
     min-width: 280px;
     border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
 }
 
@@ -87,5 +106,4 @@ footer {
     background-color: #333;
     color: #fff;
     text-align: center;
-    padding: 10px 0;
-}
+    padding
