@@ -10,6 +10,7 @@ body {
     font-family: 'Arial', sans-serif;
     background-color: #f4f4f4;
     color: #333;
+    font-size: 14px;
 }
 
 header {
@@ -29,10 +30,12 @@ nav ul {
     margin: 0;
     padding: 0;
     overflow: hidden;
+    font-size: 0.875em;
 }
 
 nav li {
     float: left;
+    font-size: 0.875em;
 }
 
 nav a {
@@ -41,11 +44,13 @@ nav a {
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+    font-size: 0.875em;
 }
 
 nav a:hover {
     background-color: #ddd;
     color: black;
+    font-size: 0.875em;
 }
 
 section {
