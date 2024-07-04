@@ -53,6 +53,10 @@ nav a:hover {
     font-size: 0.875em;
 }
 
+.container nav ul li a {
+    font-size: 1.2em; /* Adjust the size as needed */
+}
+
 section {
     max-width: 1200px;
     margin: 20px auto;
