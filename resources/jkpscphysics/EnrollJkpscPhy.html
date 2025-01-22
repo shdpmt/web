@@ -3,9 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DPP: Chapter 1</title>
+    <title>DPP: Chapter 1 - Kinematics</title>
     <link rel="stylesheet" href="../../css/style2.css">
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #6d39ff;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+
+        header nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        header nav ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+
+        header nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        footer ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+
+        footer ul li a img {
+            width: 20px;
+            vertical-align: middle;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
         .question {
             margin-bottom: 20px;
             padding: 15px;
@@ -53,13 +111,27 @@
             border-radius: 5px;
             display: none;
         }
+
+        .score {
+            margin-top: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #4caf50;
+        }
     </style>
 </head>
 <body>
     <header>
         <h1>DPP: Chapter 1 - Kinematics</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="jkpsc.html">JKPSC Course</a></li>
+            </ul>
+        </nav>
     </header>
-    <main>
+
+    <main class="container">
         <form id="dppForm">
             <div class="question" data-correct="option2">
                 <h3>1. What is the SI unit of velocity?</h3>
@@ -92,16 +164,32 @@
             </div>
 
             <button type="button" id="submitBtn">Submit</button>
+            <div class="score" id="score" style="display: none;"></div>
         </form>
     </main>
 
+    <footer>
+        <ul class="social-icons">
+            <li><a href="#"><img src="../../social-icons/facebook-icon.png" alt="Facebook"></a></li>
+            <li><a href="#"><img src="../../social-icons/whatsapp-icon.png" alt="WhatsApp"></a></li>
+            <li><a href="#"><img src="../../social-icons/twitter-icon.png" alt="Twitter"></a></li>
+            <li><a href="#"><img src="../../social-icons/youtube-icon.png" alt="YouTube"></a></li>
+            <li><a href="#"><img src="../../social-icons/linkedin-icon.png" alt="LinkedIn"></a></li>
+        </ul>
+        <p>&copy; 2023-<span id="current-year"></span> Showkat H Dar - Physics / Mathematics Teacher.</p>
+    </footer>
+
     <script>
+        // Tab Functionality
         document.getElementById('submitBtn').addEventListener('click', () => {
             const questions = document.querySelectorAll('.question');
+            let score = 0;
+            let total = questions.length;
+
             questions.forEach(question => {
                 const correctAnswer = question.dataset.correct;
                 const selectedOption = question.querySelector('input[type="radio"]:checked');
-                
+
                 // Reset styles
                 question.querySelectorAll('label').forEach(label => {
                     label.classList.remove('correct', 'incorrect');
@@ -112,6 +200,7 @@
                     const selectedLabel = selectedOption.nextElementSibling;
                     if (selectedOption.value === correctAnswer) {
                         selectedLabel.classList.add('correct');
+                        score++;
                     } else {
                         selectedLabel.classList.add('incorrect');
                     }
@@ -124,7 +213,15 @@
                 const explanation = question.querySelector('.explanation');
                 explanation.style.display = 'block';
             });
+
+            // Display final score
+            const scoreDisplay = document.getElementById('score');
+            scoreDisplay.textContent = `You scored ${score} out of ${total}.`;
+            scoreDisplay.style.display = 'block';
         });
+
+        // Dynamic Year in Footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
     </script>
 </body>
 </html>
