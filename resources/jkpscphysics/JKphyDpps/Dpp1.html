@@ -33,6 +33,19 @@
 
         .options li {
             margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .options li.correct {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .options li.incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
         }
 
         .submit-btn {
@@ -63,11 +76,17 @@
             font-size: 18px;
             margin: 10px 0;
         }
+
+        .explanation {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #333;
+        }
     </style>
 </head>
 <body>
     <header>
-        <img src="siteimages/header.png" alt="Showkat H Dar - Physics / Mathematics Teacher">
+        <img src="../../../siteimages/header.png" alt="Showkat H Dar - Physics / Mathematics Teacher">
         <div class="container">
             <nav>
                 <ul>
@@ -87,34 +106,37 @@
                     <!-- Question 1 -->
                     <div class="question">
                         <h3>1. A car accelerates uniformly from rest to 20 m/s in 5 seconds. What is the acceleration?</h3>
-                        <ul class="options">
-                            <li><input type="radio" name="q1" value="A"> A) 2 m/s²</li>
-                            <li><input type="radio" name="q1" value="B"> B) 4 m/s²</li>
-                            <li><input type="radio" name="q1" value="C"> C) 5 m/s²</li>
-                            <li><input type="radio" name="q1" value="D"> D) 10 m/s²</li>
+                        <ul class="options" data-question="q1">
+                            <li data-value="A">A) 2 m/s²</li>
+                            <li data-value="B">B) 4 m/s²</li>
+                            <li data-value="C">C) 5 m/s²</li>
+                            <li data-value="D">D) 10 m/s²</li>
                         </ul>
+                        <p class="explanation"></p>
                     </div>
 
                     <!-- Question 2 -->
                     <div class="question">
                         <h3>2. A ball is thrown vertically upwards with a speed of 20 m/s. How high will it go?</h3>
-                        <ul class="options">
-                            <li><input type="radio" name="q2" value="A"> A) 10 m</li>
-                            <li><input type="radio" name="q2" value="B"> B) 20 m</li>
-                            <li><input type="radio" name="q2" value="C"> C) 40 m</li>
-                            <li><input type="radio" name="q2" value="D"> D) 50 m</li>
+                        <ul class="options" data-question="q2">
+                            <li data-value="A">A) 10 m</li>
+                            <li data-value="B">B) 20 m</li>
+                            <li data-value="C">C) 40 m</li>
+                            <li data-value="D">D) 50 m</li>
                         </ul>
+                        <p class="explanation"></p>
                     </div>
 
                     <!-- Question 3 -->
                     <div class="question">
                         <h3>3. A train travels 120 km in 2 hours. What is its average speed?</h3>
-                        <ul class="options">
-                            <li><input type="radio" name="q3" value="A"> A) 40 km/h</li>
-                            <li><input type="radio" name="q3" value="B"> B) 50 km/h</li>
-                            <li><input type="radio" name="q3" value="C"> C) 60 km/h</li>
-                            <li><input type="radio" name="q3" value="D"> D) 70 km/h</li>
+                        <ul class="options" data-question="q3">
+                            <li data-value="A">A) 40 km/h</li>
+                            <li data-value="B">B) 50 km/h</li>
+                            <li data-value="C">C) 60 km/h</li>
+                            <li data-value="D">D) 70 km/h</li>
                         </ul>
+                        <p class="explanation"></p>
                     </div>
 
                     <button type="button" class="submit-btn" onclick="submitDPP()">Submit</button>
@@ -131,46 +153,74 @@
 
     <footer>
         <ul class="social-icons">
-            <li><a href="#"><img src="social-icons/facebook-icon.png" alt="Facebook"></a></li>
-            <li><a href="#"><img src="social-icons/whatsapp-icon.png" alt="WhatsApp"></a></li>
-            <li><a href="#"><img src="social-icons/twitter-icon.png" alt="Twitter"></a></li>
-            <li><a href="#"><img src="social-icons/youtube-icon.png" alt="YouTube"></a></li>
-            <li><a href="#"><img src="social-icons/linkedin-icon.png" alt="LinkedIn"></a></li>
+            <li><a href="#"><img src="../../../social-icons/facebook-icon.png" alt="Facebook"></a></li>
+            <li><a href="#"><img src="../../../social-icons/whatsapp-icon.png" alt="WhatsApp"></a></li>
+            <li><a href="#"><img src="../../../social-icons/twitter-icon.png" alt="Twitter"></a></li>
+            <li><a href="#"><img src="../../../social-icons/youtube-icon.png" alt="YouTube"></a></li>
+            <li><a href="#"><img src="../../../social-icons/linkedin-icon.png" alt="LinkedIn"></a></li>
         </ul>
         <p>&copy; 2023-<span id="current-year"></span> Showkat H Dar - Physics / Mathematics Teacher.</p>
     </footer>
 
     <script>
-        // Correct answers
         const correctAnswers = {
-            q1: 'A',
-            q2: 'C',
-            q3: 'C'
+            q1: { answer: "A", explanation: "Acceleration = (Final velocity - Initial velocity) / Time = 20 / 5 = 4 m/s²." },
+            q2: { answer: "C", explanation: "Maximum height = u² / (2g) = 20² / (2 × 10) = 40 m." },
+            q3: { answer: "C", explanation: "Average speed = Distance / Time = 120 / 2 = 60 km/h." }
         };
 
         function submitDPP() {
-            const form = document.getElementById('dpp-form');
-            const formData = new FormData(form);
+            const form = document.getElementById("dpp-form");
             let correctCount = 0;
             let totalQuestions = 0;
 
-            for (const [question, answer] of Object.entries(correctAnswers)) {
+            document.querySelectorAll(".question").forEach((questionEl) => {
                 totalQuestions++;
-                if (formData.get(question) === answer) {
-                    correctCount++;
+                const questionId = questionEl.querySelector(".options").dataset.question;
+                const selectedOption = questionEl.querySelector(".options li.selected");
+                const explanationEl = questionEl.querySelector(".explanation");
+                const correctAnswer = correctAnswers[questionId].answer;
+
+                // Reset styles
+                questionEl.querySelectorAll(".options li").forEach((option) => {
+                    option.classList.remove("correct", "incorrect");
+                });
+
+                // Handle selected option
+                if (selectedOption) {
+                    if (selectedOption.dataset.value === correctAnswer) {
+                        selectedOption.classList.add("correct");
+                        correctCount++;
+                    } else {
+                        selectedOption.classList.add("incorrect");
+                    }
                 }
-            }
 
+                // Highlight correct answer
+                questionEl.querySelector(`.options li[data-value="${correctAnswer}"]`).classList.add("correct");
+
+                // Show explanation
+                explanationEl.textContent = `Explanation: ${correctAnswers[questionId].explanation}`;
+            });
+
+            // Show results
             const score = Math.round((correctCount / totalQuestions) * 100);
-
-            // Display results
-            document.getElementById('correct-answers').textContent = correctCount + '/' + totalQuestions;
-            document.getElementById('score').textContent = score;
-            document.getElementById('result').style.display = 'block';
+            document.getElementById("correct-answers").textContent = `${correctCount}/${totalQuestions}`;
+            document.getElementById("score").textContent = `${score}`;
+            document.getElementById("result").style.display = "block";
         }
 
+        // Add event listener for selecting options
+        document.querySelectorAll(".options li").forEach((option) => {
+            option.addEventListener("click", () => {
+                const optionsList = option.parentElement;
+                optionsList.querySelectorAll("li").forEach((opt) => opt.classList.remove("selected"));
+                option.classList.add("selected");
+            });
+        });
+
         // Dynamic Year in Footer
-        document.getElementById('current-year').textContent = new Date().getFullYear();
+        document.getElementById("current-year").textContent = new Date().getFullYear();
     </script>
 </body>
 </html>
