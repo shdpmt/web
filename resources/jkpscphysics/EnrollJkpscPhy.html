@@ -145,10 +145,10 @@
     </footer>
 
     <script>
-        // Tab Functionality
+        // Tab functionality
         document.querySelectorAll('.tab').forEach(tab => {
             tab.addEventListener('click', () => {
-                const parent = tab.parentElement.parentElement;
+                const parent = tab.closest('.chapter-item');
                 const tabContents = parent.querySelectorAll('.tab-content');
                 const tabs = parent.querySelectorAll('.tab');
 
@@ -157,13 +157,12 @@
 
                 tab.classList.add('active');
                 const contentId = tab.getAttribute('data-tab');
-                document.getElementById(contentId).classList.add('active');
+                parent.querySelector(`#${contentId}`).classList.add('active');
             });
         });
 
-        // Dynamic Year in Footer
+        // Dynamic year for footer
         document.getElementById('current-year').textContent = new Date().getFullYear();
     </script>
 </body>
 </html>
- 
