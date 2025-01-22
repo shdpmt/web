@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DPP - Chapter 1: Kinematics</title>
+    <link rel="stylesheet" href="css/style2.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <style>
+        .dpp-container {
+            margin: 20px auto;
+            padding: 20px;
+            max-width: 800px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .question {
+            margin-bottom: 20px;
+        }
+
+        .question h3 {
+            font-size: 20px;
+        }
+
+        .options {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .options li {
+            margin: 10px 0;
+        }
+
+        .submit-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 18px;
+            color: white;
+            background-color: #6d39ff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background-color: #4d2eb3;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #e7ffe7;
+            display: none;
+        }
+
+        .result p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="siteimages/header.png" alt="Showkat H Dar - Physics / Mathematics Teacher">
+        <div class="container">
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="jkpsc.html">JKPSC Course</a></li>
+                    <li><a href="chapter1-dpp.html" class="active">DPP: Kinematics</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="dpp">
+            <div class="dpp-container">
+                <h2>DPP - Chapter 1: Kinematics</h2>
+                <form id="dpp-form">
+                    <!-- Question 1 -->
+                    <div class="question">
+                        <h3>1. A car accelerates uniformly from rest to 20 m/s in 5 seconds. What is the acceleration?</h3>
+                        <ul class="options">
+                            <li><input type="radio" name="q1" value="A"> A) 2 m/s²</li>
+                            <li><input type="radio" name="q1" value="B"> B) 4 m/s²</li>
+                            <li><input type="radio" name="q1" value="C"> C) 5 m/s²</li>
+                            <li><input type="radio" name="q1" value="D"> D) 10 m/s²</li>
+                        </ul>
+                    </div>
+
+                    <!-- Question 2 -->
+                    <div class="question">
+                        <h3>2. A ball is thrown vertically upwards with a speed of 20 m/s. How high will it go?</h3>
+                        <ul class="options">
+                            <li><input type="radio" name="q2" value="A"> A) 10 m</li>
+                            <li><input type="radio" name="q2" value="B"> B) 20 m</li>
+                            <li><input type="radio" name="q2" value="C"> C) 40 m</li>
+                            <li><input type="radio" name="q2" value="D"> D) 50 m</li>
+                        </ul>
+                    </div>
+
+                    <!-- Question 3 -->
+                    <div class="question">
+                        <h3>3. A train travels 120 km in 2 hours. What is its average speed?</h3>
+                        <ul class="options">
+                            <li><input type="radio" name="q3" value="A"> A) 40 km/h</li>
+                            <li><input type="radio" name="q3" value="B"> B) 50 km/h</li>
+                            <li><input type="radio" name="q3" value="C"> C) 60 km/h</li>
+                            <li><input type="radio" name="q3" value="D"> D) 70 km/h</li>
+                        </ul>
+                    </div>
+
+                    <button type="button" class="submit-btn" onclick="submitDPP()">Submit</button>
+                </form>
+
+                <div class="result" id="result">
+                    <h3>Results:</h3>
+                    <p>Correct Answers: <span id="correct-answers"></span></p>
+                    <p>Your Score: <span id="score"></span>%</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <ul class="social-icons">
+            <li><a href="#"><img src="social-icons/facebook-icon.png" alt="Facebook"></a></li>
+            <li><a href="#"><img src="social-icons/whatsapp-icon.png" alt="WhatsApp"></a></li>
+            <li><a href="#"><img src="social-icons/twitter-icon.png" alt="Twitter"></a></li>
+            <li><a href="#"><img src="social-icons/youtube-icon.png" alt="YouTube"></a></li>
+            <li><a href="#"><img src="social-icons/linkedin-icon.png" alt="LinkedIn"></a></li>
+        </ul>
+        <p>&copy; 2023-<span id="current-year"></span> Showkat H Dar - Physics / Mathematics Teacher.</p>
+    </footer>
+
+    <script>
+        // Correct answers
+        const correctAnswers = {
+            q1: 'A',
+            q2: 'C',
+            q3: 'C'
+        };
+
+        function submitDPP() {
+            const form = document.getElementById('dpp-form');
+            const formData = new FormData(form);
+            let correctCount = 0;
+            let totalQuestions = 0;
+
+            for (const [question, answer] of Object.entries(correctAnswers)) {
+                totalQuestions++;
+                if (formData.get(question) === answer) {
+                    correctCount++;
+                }
+            }
+
+            const score = Math.round((correctCount / totalQuestions) * 100);
+
+            // Display results
+            document.getElementById('correct-answers').textContent = correctCount + '/' + totalQuestions;
+            document.getElementById('score').textContent = score;
+            document.getElementById('result').style.display = 'block';
+        }
+
+        // Dynamic Year in Footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
