@@ -6,8 +6,46 @@
     <title>DPP: Chapter 1</title>
     <link rel="stylesheet" href="../../css/style2.css">
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #6d39ff;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        footer ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        footer ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+
+        footer ul li a img {
+            width: 20px;
+            vertical-align: middle;
+        }
+
         .question {
-            margin-bottom: 20px;
+            margin: 20px;
             padding: 15px;
             border: 1px solid #ddd;
             border-radius: 5px;
@@ -53,78 +91,106 @@
             border-radius: 5px;
             display: none;
         }
+
+        .submit-question {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #6d39ff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .submit-question:hover {
+            background-color: #5a33e0;
+        }
     </style>
 </head>
 <body>
     <header>
         <h1>DPP: Chapter 1 - Kinematics</h1>
     </header>
+
     <main>
-        <form id="dppForm">
-            <div class="question" data-correct="option2">
-                <h3>1. What is the SI unit of velocity?</h3>
-                <div class="options">
-                    <input type="radio" id="q1-option1" name="q1" value="option1">
-                    <label for="q1-option1">Meter</label>
+        <div class="question" data-correct="option2">
+            <h3>1. What is the SI unit of velocity?</h3>
+            <div class="options">
+                <input type="radio" id="q1-option1" name="q1" value="option1">
+                <label for="q1-option1">Meter</label>
 
-                    <input type="radio" id="q1-option2" name="q1" value="option2">
-                    <label for="q1-option2">Meter per second</label>
+                <input type="radio" id="q1-option2" name="q1" value="option2">
+                <label for="q1-option2">Meter per second</label>
 
-                    <input type="radio" id="q1-option3" name="q1" value="option3">
-                    <label for="q1-option3">Second</label>
-                </div>
-                <div class="explanation">The SI unit of velocity is "meter per second" because velocity is displacement divided by time.</div>
+                <input type="radio" id="q1-option3" name="q1" value="option3">
+                <label for="q1-option3">Second</label>
             </div>
+            <button class="submit-question" onclick="submitQuestion(this)">Submit</button>
+            <div class="explanation">The SI unit of velocity is "meter per second" because velocity is displacement divided by time.</div>
+        </div>
 
-            <div class="question" data-correct="option3">
-                <h3>2. What is the slope of a velocity-time graph?</h3>
-                <div class="options">
-                    <input type="radio" id="q2-option1" name="q2" value="option1">
-                    <label for="q2-option1">Displacement</label>
+        <div class="question" data-correct="option3">
+            <h3>2. What is the slope of a velocity-time graph?</h3>
+            <div class="options">
+                <input type="radio" id="q2-option1" name="q2" value="option1">
+                <label for="q2-option1">Displacement</label>
 
-                    <input type="radio" id="q2-option2" name="q2" value="option2">
-                    <label for="q2-option2">Velocity</label>
+                <input type="radio" id="q2-option2" name="q2" value="option2">
+                <label for="q2-option2">Velocity</label>
 
-                    <input type="radio" id="q2-option3" name="q2" value="option3">
-                    <label for="q2-option3">Acceleration</label>
-                </div>
-                <div class="explanation">The slope of a velocity-time graph represents acceleration, as acceleration is the rate of change of velocity.</div>
+                <input type="radio" id="q2-option3" name="q2" value="option3">
+                <label for="q2-option3">Acceleration</label>
             </div>
-
-            <button type="button" id="submitBtn">Submit</button>
-        </form>
+            <button class="submit-question" onclick="submitQuestion(this)">Submit</button>
+            <div class="explanation">The slope of a velocity-time graph represents acceleration, as acceleration is the rate of change of velocity.</div>
+        </div>
     </main>
 
+    <footer>
+        <ul class="social-icons">
+            <li><a href="#"><img src="../../social-icons/facebook-icon.png" alt="Facebook"></a></li>
+            <li><a href="#"><img src="../../social-icons/whatsapp-icon.png" alt="WhatsApp"></a></li>
+            <li><a href="#"><img src="../../social-icons/twitter-icon.png" alt="Twitter"></a></li>
+            <li><a href="#"><img src="../../social-icons/youtube-icon.png" alt="YouTube"></a></li>
+            <li><a href="#"><img src="../../social-icons/linkedin-icon.png" alt="LinkedIn"></a></li>
+        </ul>
+        <p>&copy; 2023-<span id="current-year"></span> Showkat H Dar - Physics / Mathematics Teacher.</p>
+    </footer>
+
     <script>
-        document.getElementById('submitBtn').addEventListener('click', () => {
-            const questions = document.querySelectorAll('.question');
-            questions.forEach(question => {
-                const correctAnswer = question.dataset.correct;
-                const selectedOption = question.querySelector('input[type="radio"]:checked');
-                
-                // Reset styles
-                question.querySelectorAll('label').forEach(label => {
-                    label.classList.remove('correct', 'incorrect');
-                });
+        // Function to handle submission of individual questions
+        function submitQuestion(button) {
+            const question = button.closest('.question');
+            const correctAnswer = question.dataset.correct;
+            const selectedOption = question.querySelector('input[type="radio"]:checked');
 
-                // Highlight correct and incorrect answers
-                if (selectedOption) {
-                    const selectedLabel = selectedOption.nextElementSibling;
-                    if (selectedOption.value === correctAnswer) {
-                        selectedLabel.classList.add('correct');
-                    } else {
-                        selectedLabel.classList.add('incorrect');
-                    }
-                }
-
-                // Highlight the correct answer
-                question.querySelector(`input[value="${correctAnswer}"] + label`).classList.add('correct');
-
-                // Show explanation
-                const explanation = question.querySelector('.explanation');
-                explanation.style.display = 'block';
+            // Reset styles
+            question.querySelectorAll('label').forEach(label => {
+                label.classList.remove('correct', 'incorrect');
             });
-        });
+
+            if (selectedOption) {
+                const selectedLabel = selectedOption.nextElementSibling;
+                if (selectedOption.value === correctAnswer) {
+                    selectedLabel.classList.add('correct');
+                } else {
+                    selectedLabel.classList.add('incorrect');
+                }
+            }
+
+            // Highlight the correct answer
+            question.querySelector(`input[value="${correctAnswer}"] + label`).classList.add('correct');
+
+            // Show explanation
+            const explanation = question.querySelector('.explanation');
+            explanation.style.display = 'block';
+
+            // Disable the submit button for this question
+            button.disabled = true;
+        }
+
+        // Dynamic year for the footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
     </script>
 </body>
 </html>
