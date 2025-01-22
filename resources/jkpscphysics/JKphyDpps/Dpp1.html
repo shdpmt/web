@@ -3,63 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enroll in JKPSC Physics Course</title>
+    <title>DPP: Chapter 1</title>
     <link rel="stylesheet" href="../../css/style2.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
     <style>
-        .chapter-list {
-            margin: 20px;
-            padding: 0;
-            list-style-type: none;
-        }
-
-        .chapter-item {
-            margin: 10px 0;
+        .question {
+            margin-bottom: 20px;
             padding: 15px;
             border: 1px solid #ddd;
             border-radius: 5px;
             background-color: #f9f9f9;
         }
 
-        .tabs {
+        .options {
             margin-top: 10px;
-            display: flex;
-            border-bottom: 1px solid #ddd;
         }
 
-        .tab {
-            padding: 10px 20px;
-            cursor: pointer;
+        .options label {
+            display: block;
+            padding: 5px;
+            margin: 5px 0;
             border: 1px solid #ddd;
-            border-radius: 5px 5px 0 0;
+            border-radius: 5px;
+            cursor: pointer;
             background-color: #f0f0f0;
-            margin-right: 5px;
         }
 
-        .tab.active {
+        .options input[type="radio"] {
+            display: none;
+        }
+
+        .options input[type="radio"]:checked + label {
             background-color: #6d39ff;
             color: white;
             font-weight: bold;
         }
 
-        .tab-content {
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-top: none;
-            display: none;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
         .correct {
             background-color: #4caf50 !important;
         }
 
         .incorrect {
             background-color: #f44336 !important;
+        }
+
+        .explanation {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            display: none;
         }
     </style>
 </head>
